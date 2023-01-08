@@ -1,11 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class WASDmovement : MonoBehaviour{
     float speed;
+    public string mainMenu;
     public Animator animator;
-    public GameObject DanceParty;
+    public GameObject danceParty;
     // Start is called before the first frame update
     void Start(){
         //RigidBody rigidBody = GetComponent<RigidBody>();
@@ -35,15 +37,21 @@ public class WASDmovement : MonoBehaviour{
             animator.SetBool("Walk",true);
            
         }
+        //Dancing
         if(Input.GetKey(KeyCode.P)){
             animator.SetBool("Dancing", true);
-            DanceParty.SetActive(true);
+            danceParty.SetActive(true);
 
         }
+        //escape to main menu
+        if(Input.GetKey(KeyCode.Escape)){
+            SceneManager.LoadScene(mainMenu);
+        }
+        //idle
         else if(!Input.anyKey){
             animator.SetBool("Walk", false);
             animator.SetBool("Dancing", false);
-            DanceParty.SetActive(false);
+            danceParty.SetActive(false);
 
         }
 
